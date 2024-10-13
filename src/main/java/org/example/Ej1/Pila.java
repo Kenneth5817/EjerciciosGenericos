@@ -1,48 +1,49 @@
 package org.example.Ej1;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pila <T> {
+//Creamos la clase Pila
+public class Pila<T> {
+    //Creamos una lista donde guardaremos los elementos
+    private List<T> elementos;
 
-    // Tenemos elemento T
-    private T elemento;
-
-
-    //Diferentes métodos
-    public void estaVacia(T elemento){
-        elemento = null;
-    }
-    public void extraer(T elemento){
-        this.elemento = elemento;
-    }
-    public T primero(){
-        return this.elemento;
-    }
-    public T aniadir(){
-        return this.elemento;
+    //Constructor
+    public Pila() {
+        this.elementos = new ArrayList<>();
     }
 
+    //Métodos:
+    //para saber si la pila está vacía
+    public boolean estaVacia() {
+        return elementos.isEmpty();
+    }
+
+    //para indicar que el último elemento queremos sacarlo de la pila
+    public T extraer() {
+        if (estaVacia()) {
+            throw new IllegalStateException("En la pila no hay ningún elemento, está vacía");
+        }
+        //Se saca el último elemento de la pila
+        return elementos.remove(elementos.size() - 1);
+    }
+
+    //para indicar que queremos que nos diga el primer elemento de la colección
+    public T primero() {
+        //En caso de que en la pila no haya nada, se mostrará la siguiente excepción
+        if (estaVacia()) {
+            throw new IllegalStateException("La pila está vacía");
+        }
+        return elementos.get(0);
+    }
+
+    //para indicar qué elemento queremos añadir a la pila
+    public void aniadir(T dato) {
+        elementos.add(dato);
+    }
+
+    //toString ;)
     @Override
     public String toString() {
-        return "Pila{" +
-                "elemento=" + elemento +
-                '}';
-    }
-
-        List<T> elementos = new ArrayList<>();
-
-    //Métodos apilar y desapilar
-    void apilar(T nuevo) {
-        elementos.add(nuevo);
-    }
-
-    T desapilar() {
-        T elem = null;
-        if (elementos.size() > 0) {
-            elem = elementos.remove(elementos.size() - 1);
-        }
-        return elem;
+        return "Pila: " + elementos.toString();
     }
 }
-

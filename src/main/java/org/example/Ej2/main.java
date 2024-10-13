@@ -1,26 +1,26 @@
-package org.example.Ej1;
+package org.example.Ej2;
 
-import java.util.LinkedList;
-import java.util.List;
-
-public class main extends Pila<String> {
-
+public class main {
     public static void main(String[] args) {
-        //Creamos una colección de Integer para almacenar los números
-        Pila<Integer> pila = new Pila<>();
+        // Creamos una pila con capacidad para 10 elementos
+        PilaArray<Integer> pila = new PilaArray<>(10);
         //Vemos si la pila está vacía
         System.out.println("La pila está vacía?: "+pila.estaVacia());
         System.out.println("Añadiendo elementos a la pila....");
-
         //Añadimos elementos a la Pila
         pila.aniadir(58);
         pila.aniadir(12);
         pila.aniadir(24);
         pila.aniadir(79);
         pila.aniadir(84);
+
+        //Mostramos estado de la pila
         System.out.println(pila);
+
+        //Sacamos el primer elemento
         System.out.println("Primer elemento: "+pila.primero());
-        System.out.println("Extraemos el último elemento: "+pila.extraer());
+        //Borramos el último de la pila"
+        System.out.println("Borramos el último elemento: "+pila.extraer());
         System.out.println(pila);
         //Vemos si la pila está vacía ahora
         System.out.println("La pila está vacía?: "+pila.estaVacia());

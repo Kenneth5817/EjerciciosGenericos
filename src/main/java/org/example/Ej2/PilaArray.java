@@ -1,34 +1,73 @@
 package org.example.Ej2;
 
+// PilaArray.java
 public class PilaArray<T> {
 
-    //Getters y Setters
-    public T[] getArray() {
-        return array;
+    // Atributos
+    private T[] elementos;
+    private int tamanio;
+    private int contador;
+
+    // Constructor
+    public PilaArray(int capacidad) {
+        //Decidimos el tamaño máx. de la pila
+        this.tamanio = capacidad;
+        // Inicializamos el array
+        this.elementos = (T[]) new Object[tamanio];
+        this.contador = 0;
     }
 
-    public PilaArray(T[] array) {
-        this.array = array;
+    // Comprueba si la pila está vacía
+    public boolean estaVacia() {
+        return contador == 0;
     }
 
-    public void setArray(T[] array) {
-        this.array = array;
-    }
-
-    //Atributo Privado Array
-    private T []array;
-
-    public static void main (String[]args){
-        //Almacamos un array genérico de tipo Integer
-        PilaArray<Integer> arrayGenerico=new PilaArray<Integer>(new Integer[]{1,2,3,4,5});
-
-        //Usando un for each, vamos recorriendo e imprimos el resultado por pantalla
-        for(Integer integer:arrayGenerico.getArray()){
-            System.out.println(integer);
+    // para quitar el último elemento añadido
+    public T extraer() {
+        //Si no hay elementos lanzará una excepción
+        if (estaVacia()) {
+            throw new IllegalStateException("La pila está vacía");
         }
-
-        //En la posicion 3 se tendrá un valor de 558.
-        arrayGenerico.getArray()[3]=558;
+        //Saca el último elemento
+        T dato = elementos[contador - 1];
+        contador--;
+        return dato;
     }
 
+    // para devolver el primer elemento (el más antiguo)
+    public T primero() {
+        //Si la pila está vacía, lanza una excepción
+        if (estaVacia()) {
+            throw new IllegalStateException("La pila está vacía");
+        }
+        // Devuelve el primer elemento
+        return elementos[0];
+    }
+
+
+    // para añadir un elemento a la pila
+    public void aniadir(T dato) {
+        // Si el contador es mayor o = al tamaño lanzará excepción
+        if (contador >= tamanio) {
+            throw new IllegalStateException("La pila está llena");
+        }
+        //Añade el nuevo elemento
+        elementos[contador] = dato;
+        //Incrementa el contador
+        contador++;
+    }
+
+    // Devuelve la representación en cadena de la pila
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("Pila: [");
+        for (int i = 0; i < contador; i++) {
+            sb.append(elementos[i]);
+            if (i < contador - 1) {
+                sb.append(", "); // Añade una coma entre elementos
+            }
+        }
+        sb.append("]");
+        return sb.toString(); // Devuelve la representación de la pila
+    }
 }

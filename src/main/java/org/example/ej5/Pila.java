@@ -1,58 +1,46 @@
 package org.example.ej5;
 import java.util.ArrayList;
 
-import java.util.ArrayList;
-
+//La clase Pila implementará la interfaz con los métodos de los genericos
 public class Pila<T> implements ColeccionSimpleGenerica<T> {
-    private ArrayList<T> elementos; // Lista para almacenar los elementos
+    //Atributo->array donde almacenaremos los elementos
+    private ArrayList<T> elementos;
 
+    //Generamos contructor de Pila
     public Pila() {
-        this.elementos = new ArrayList<>(); // Inicializa la lista de elementos
+        this.elementos = new ArrayList<>();
     }
 
+    //IMPLEMENTACIÓN DE LOS MÉTODOS:
     @Override
     public boolean estaVacia() {
-        return elementos.isEmpty(); // Verifica si la lista está vacía
+        //Comprueba si la lista está vacia
+        return elementos.isEmpty();
     }
 
     @Override
     public T extraer() {
         if (estaVacia()) {
-            throw new IllegalStateException("La colección está vacía"); // Lanza excepción si está vacía
+            //Si está vacía la pila lanzará esta excepción
+            throw new IllegalStateException("La colección está vacía");
         }
-        return elementos.remove(elementos.size() - 1); // Elimina y devuelve el último elemento
+        //Si no, devuelve borra el último elemento
+        return elementos.remove(elementos.size() - 1);
     }
 
     @Override
     public T primero() {
         if (estaVacia()) {
-            throw new IllegalStateException("La colección está vacía"); // Lanza excepción si está vacía
+            //Nuevamente, comprueba si está vacía
+            throw new IllegalStateException("La colección está vacía");
         }
-        return elementos.get(elementos.size() - 1); // Devuelve el último elemento sin eliminarlo
+        //Nos devuevle el primer elemento de la colección
+        return elementos.get(0);
     }
 
+    //Este método añadirá el elemento introducido al final de la lista
     @Override
     public void aniadir(T elemento) {
-        elementos.add(elemento); // Añade el elemento al final de la lista
-    }
-
-    // Método para demostrar el uso de la pila
-    public static void main(String[] args) {
-        Pila<Integer> pila = new Pila<>(); // Crea una pila de enteros
-
-        // Añade elementos a la pila
-        pila.aniadir(10);
-        pila.aniadir(20);
-        pila.aniadir(30);
-
-        // Muestra el primer elemento
-        System.out.println("El primer elemento (top) de la pila es: " + pila.primero()); // Debe mostrar 30
-
-        // Extrae un elemento y muestra el nuevo top
-        System.out.println("Extraer elemento: " + pila.extraer()); // Debe mostrar 30
-        System.out.println("El primer elemento (top) ahora es: " + pila.primero()); // Debe mostrar 20
-
-        // Verifica si la pila está vacía
-        System.out.println("¿Está vacía la pila? " + pila.estaVacia()); // Debe mostrar false
+        elementos.add(elemento);
     }
 }

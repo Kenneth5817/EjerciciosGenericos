@@ -1,40 +1,51 @@
-package org.example.ej4;
+package org.example.Ej3;
 
-public class Ej4Resuelto {
-    class Matriz<T> {
+    public class Matriz<T> {
+
+        //Atributos
         private T[][] matriz;
         private int filas;
         private int columnas;
 
-        @SuppressWarnings("unchecked")
+        //Constructor de Matriz
         public Matriz(int filas, int columnas) {
             this.filas = filas;
             this.columnas = columnas;
+            // Inicializa matriz con tipo genérico
             matriz = (T[][]) new Object[filas][columnas];
         }
 
+        //Con el set modificaremos y pondremos elemento en fila y columna indicada
         public void set(int fila, int columna, T elemento) {
+            //Comprobamos que los índices estén dentro del rango
             if (fila < 0 || fila >= filas || columna < 0 || columna >= columnas) {
+                //Si está fuera de rango, lanzamos una excepción
                 throw new IndexOutOfBoundsException("Índices fuera de rango");
             }
+            //Añade elemento en el lugar indicado
             matriz[fila][columna] = elemento;
         }
 
+        //Con el get sacaremos elemento de una columna y fila indicada
         public T get(int fila, int columna) {
+            // Valida que los índices estén dentro del rango
             if (fila < 0 || fila >= filas || columna < 0 || columna >= columnas) {
                 throw new IndexOutOfBoundsException("Índices fuera de rango");
             }
-            return matriz[fila][columna];
+            return matriz[fila][columna]; // Devuelve el elemento en la posición indicada
         }
 
+        //Devuelve la cantidad de columnas que hay en la matriz
         public int columnas() {
             return columnas;
         }
 
+        //Devuelve la cantidad de filas
         public int filas() {
             return filas;
         }
-
+    
+        //Método toString
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
@@ -49,26 +60,4 @@ public class Ej4Resuelto {
             }
             return sb.toString(); // Devuelve la representación de la matriz
         }
-
-        public void main(String[] args) {
-            // Crear una matriz de Integer con 4 filas y 2 columnas
-            Matriz<Integer> matriz = new Matriz<>(4, 2);
-
-            // Rellenar la matriz con números consecutivos comenzando por el 1
-            int contador = 1;
-            for (int i = 0; i < matriz.filas(); i++) {
-                for (int j = 0; j < matriz.columnas(); j++) {
-                    matriz.set(i, j, contador++);
-                }
-            }
-
-            // Mostrar la matriz
-            System.out.println("Matriz:");
-            System.out.println(matriz);
-
-            // Mostrar el contenido de la celda en la fila 1, columna 2
-            System.out.println("Contenido de la celda en la fila 1, columna 2: " + matriz.get(1, 1));
-        }
-    }
-
 }
